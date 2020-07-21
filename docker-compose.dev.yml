@@ -1,0 +1,26 @@
+version: '3.2'
+
+services:
+  mobiliza-frontend:
+    container_name: mobiliza-frontend
+    image: mobiliza-frontend
+    build:
+      context: ./frontend
+      dockerfile: ./docker/Dockerfile
+      args:
+        - TZ=America/Sao_Paulo
+    env_file:
+      - ./frontend/docker/.docker.dev.env
+    volumes:
+      - type: bind
+        source: ./frontend/coverage
+        target: /frontend/coverage
+      - type: bind
+        source: ./frontend/public
+        target: /frontend/public
+      - type: bind
+        source: ./frontend/src
+        target: /frontend/src
+    ports:
+      - target: 3000
+        published: 3000
