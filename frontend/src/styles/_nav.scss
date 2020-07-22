@@ -1,0 +1,8 @@
+.nav-link {
+  text-transform: uppercase;
+}
+
+.nav-link.active {
+  font-weight: 900;
+  color: $secondary !important;
+}
