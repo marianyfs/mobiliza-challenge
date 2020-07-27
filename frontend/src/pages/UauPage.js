@@ -1,38 +1,43 @@
 import React from 'react';
 import {
-  arrayOf, shape, string,
+  arrayOf, func, shape, string,
 } from 'prop-types';
+
+import { connect } from 'react-redux';
 
 import ListItems from '../components/molecules/ListItems';
 
 import ItemsTemplate from '../components/templates/ItemsTemplate';
 
-// preencher com o redux
-function UauPage({ items }) {
-  return (
-    <ItemsTemplate
-      title="Lista de filmes UAU"
-      items={(
-        <ListItems
-          buttonLabel="Remover"
-          // Remover do Redux
-          handleItemClick={() => {}}
-          items={items}
-        />
-      )}
-    />
-  );
-}
+import { removeMovie } from '../redux/actions';
+import { getMoviesList } from '../redux/selectors';
+
+const UauPage = ({ movies, ...props }) => (
+  <ItemsTemplate
+    title="Lista de filmes UAU"
+    items={(
+      <ListItems
+        actionLabel="Remover"
+        handleItemClick={(item) => props.removeMovie(item)}
+        items={movies}
+      />
+    )}
+  />
+);
 
 UauPage.defaultProps = {
-  items: [],
+  movies: [],
+  removeMovie: () => {},
 };
 
 UauPage.propTypes = {
-  items: arrayOf(shape({
+  movies: arrayOf(shape({
     imdbID: string,
     Title: string,
   })),
+  removeMovie: func,
 };
 
-export default UauPage;
+const mapStateToProps = (state) => ({ movies: getMoviesList(state) });
+
+export default connect(mapStateToProps, { removeMovie })(UauPage);

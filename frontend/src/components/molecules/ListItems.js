@@ -7,7 +7,7 @@ import {
   Accordion, Button, ListGroup,
 } from 'react-bootstrap';
 
-const ListItems = ({ buttonLabel, handleItemClick, items }) => {
+const ListItems = ({ actionLabel, handleItemClick, items }) => {
   if (items.length === 0) {
     return (<p className="text-center"> Não há itens para serem exibidos</p>);
   }
@@ -15,25 +15,23 @@ const ListItems = ({ buttonLabel, handleItemClick, items }) => {
   return (
     <ListGroup variant="primary">
       <Accordion>
-        {items.map(({
-          imdbID, Title,
-        }) => (
+        {items.map((item) => (
           <ListGroup.Item
-            key={imdbID}
+            key={item.imdbID}
           >
             {
               handleItemClick
               && (
               <Button
                 className="mr-2"
-                onClick={handleItemClick}
+                onClick={() => handleItemClick(item)}
                 size="sm"
               >
-                {buttonLabel}
+                {actionLabel}
               </Button>
               )
             }
-            {Title}
+            {`${item.Title} - ${item.Year}`}
           </ListGroup.Item>
         ))}
       </Accordion>
@@ -42,13 +40,13 @@ const ListItems = ({ buttonLabel, handleItemClick, items }) => {
 };
 
 ListItems.defaultProps = {
-  buttonLabel: undefined,
+  actionLabel: undefined,
   handleItemClick: undefined,
   items: [],
 };
 
 ListItems.propTypes = {
-  buttonLabel: string,
+  actionLabel: string,
   handleItemClick: func,
   items: arrayOf(shape({
     imdbID: string,
