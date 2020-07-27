@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { func } from 'prop-types';
+
+import { connect } from 'react-redux';
 
 import {
   Alert,
@@ -12,8 +15,9 @@ import Search from '../components/molecules/Search';
 import ItemsTemplate from '../components/templates/ItemsTemplate';
 
 import useSearch from './searchPage.utils';
+import { addMovie } from '../redux/actions';
 
-function SearchPage() {
+function SearchPage(props) {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState('');
 
@@ -34,9 +38,8 @@ function SearchPage() {
         : undefined}
       items={(
         <ListItems
-          buttonLabel="UAU"
-          // Adicionar no Redux
-          handleItemClick={() => {}}
+          actionLabel="UAU"
+          handleItemClick={(item) => props.addMovie(item)}
           items={items}
         />
       )}
@@ -53,4 +56,15 @@ function SearchPage() {
   );
 }
 
-export default SearchPage;
+SearchPage.defaultProps = {
+  addMovie: () => {},
+};
+
+SearchPage.propTypes = {
+  addMovie: func,
+};
+
+export default connect(
+  null,
+  { addMovie },
+)(SearchPage);
