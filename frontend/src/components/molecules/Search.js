@@ -5,10 +5,11 @@ import {
   Button, FormControl, InputGroup,
 } from 'react-bootstrap';
 
+
 const Search = ({ handleSearch }) => {
   const [search, setSearch] = useState('');
 
-  function handleSearchChange(event) {
+  const handleSearchChange = (event) => {
     event.preventDefault();
     setSearch(event.target.value);
   }

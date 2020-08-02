@@ -15,7 +15,7 @@ const search = (query, page) => {
   };
 };
 
-export default function useSearch(query, page) {
+export default (query, page) => {
   const [error, setError] = useState(false);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);

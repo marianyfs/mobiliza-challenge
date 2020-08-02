@@ -18,7 +18,7 @@ import useSearch from './searchPage.utils';
 import { addMovie } from '../redux/actions';
 import { getMoviesByIds } from '../redux/selectors';
 
-function SearchPage({ moviesByIds, ...props}) {
+const SearchPage = ({ moviesByIds, ...props}) => {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState('');
 

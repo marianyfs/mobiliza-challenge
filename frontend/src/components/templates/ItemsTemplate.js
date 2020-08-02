@@ -3,9 +3,9 @@ import { element, string } from 'prop-types';
 
 import { Col, Row } from 'react-bootstrap';
 
-function ItemsTemplate({
+const ItemsTemplate = ({
   error, loading, items, pagination, search, title,
-}) {
+}) => {
   return (
     <>
       { title && (
