@@ -7,18 +7,20 @@ import {
   Button, ListGroup,
 } from 'react-bootstrap';
 
-const ListItems = ({ actionLabel, handleItemClick, items, moviesByIds }) => {
+const ListItems = ({
+  actionLabel, handleItemClick, items, moviesByIds,
+}) => {
   if (items.length === 0) {
     return (<p className="text-center"> Não há itens para serem exibidos</p>);
   }
 
   return (
     <ListGroup variant="primary">
-        {items.map((item) => (
-          <ListGroup.Item
-            key={item.imdbID}
-          >
-            {
+      {items.map((item) => (
+        <ListGroup.Item
+          key={item.imdbID}
+        >
+          {
               handleItemClick
               && (
               <Button
@@ -31,9 +33,9 @@ const ListItems = ({ actionLabel, handleItemClick, items, moviesByIds }) => {
               </Button>
               )
             }
-            {`${item.Title} - ${item.Year}`}
-          </ListGroup.Item>
-        ))}
+          {`${item.Title} - ${item.Year}`}
+        </ListGroup.Item>
+      ))}
     </ListGroup>
   );
 };
@@ -42,7 +44,7 @@ ListItems.defaultProps = {
   actionLabel: undefined,
   handleItemClick: undefined,
   items: [],
-  moviesByIds: {}
+  moviesByIds: {},
 };
 
 ListItems.propTypes = {
@@ -54,7 +56,7 @@ ListItems.propTypes = {
   })),
   moviesByIds: shape({
     imdbID: string,
-  })
+  }),
 };
 
 export default ListItems;

@@ -55,4 +55,4 @@ export default (query, page) => {
   return {
     error, items, loading, numberOfItems,
   };
-}
+};

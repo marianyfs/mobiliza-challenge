@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { func } from 'prop-types';
+import { func, string, shape } from 'prop-types';
 
 import { connect } from 'react-redux';
 
@@ -18,7 +18,7 @@ import useSearch from './searchPage.utils';
 import { addMovie } from '../redux/actions';
 import { getMoviesByIds } from '../redux/selectors';
 
-const SearchPage = ({ moviesByIds, ...props}) => {
+const SearchPage = ({ moviesByIds, ...props }) => {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState('');
 
@@ -56,14 +56,18 @@ const SearchPage = ({ moviesByIds, ...props}) => {
       title="Front-end dev Mobiliza - Movie App"
     />
   );
-}
+};
 
 SearchPage.defaultProps = {
   addMovie: () => {},
+  moviesByIds: {},
 };
 
 SearchPage.propTypes = {
   addMovie: func,
+  moviesByIds: shape({
+    imdbID: string,
+  }),
 };
 
 const mapStateToProps = (state) => ({ moviesByIds: getMoviesByIds(state) });
