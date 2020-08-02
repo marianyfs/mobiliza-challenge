@@ -4,17 +4,16 @@ import {
 } from 'prop-types';
 
 import {
-  Accordion, Button, ListGroup,
+  Button, ListGroup,
 } from 'react-bootstrap';
 
-const ListItems = ({ actionLabel, handleItemClick, items }) => {
+const ListItems = ({ actionLabel, handleItemClick, items, moviesByIds }) => {
   if (items.length === 0) {
     return (<p className="text-center"> Não há itens para serem exibidos</p>);
   }
 
   return (
     <ListGroup variant="primary">
-      <Accordion>
         {items.map((item) => (
           <ListGroup.Item
             key={item.imdbID}
@@ -24,6 +23,7 @@ const ListItems = ({ actionLabel, handleItemClick, items }) => {
               && (
               <Button
                 className="mr-2"
+                disabled={!!moviesByIds[item.imdbID]}
                 onClick={() => handleItemClick(item)}
                 size="sm"
               >
@@ -34,7 +34,6 @@ const ListItems = ({ actionLabel, handleItemClick, items }) => {
             {`${item.Title} - ${item.Year}`}
           </ListGroup.Item>
         ))}
-      </Accordion>
     </ListGroup>
   );
 };
@@ -43,6 +42,7 @@ ListItems.defaultProps = {
   actionLabel: undefined,
   handleItemClick: undefined,
   items: [],
+  moviesByIds: {}
 };
 
 ListItems.propTypes = {
@@ -52,6 +52,9 @@ ListItems.propTypes = {
     imdbID: string,
     Title: string,
   })),
+  moviesByIds: shape({
+    imdbID: string,
+  })
 };
 
 export default ListItems;
