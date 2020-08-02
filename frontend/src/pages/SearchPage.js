@@ -8,7 +8,7 @@ import {
 } from 'react-bootstrap';
 
 import Loading from '../components/atoms/Loading';
-import ListItems from '../components/molecules/ListItems';
+import UauListItems from '../components/molecules/UauListItems';
 import Pagination from '../components/molecules/Pagination';
 import Search from '../components/molecules/Search';
 
@@ -16,8 +16,9 @@ import ItemsTemplate from '../components/templates/ItemsTemplate';
 
 import useSearch from './searchPage.utils';
 import { addMovie } from '../redux/actions';
+import { getMoviesByIds } from '../redux/selectors';
 
-function SearchPage(props) {
+function SearchPage({ moviesByIds, ...props}) {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState('');
 
@@ -37,10 +38,11 @@ function SearchPage(props) {
         ? <Loading />
         : undefined}
       items={(
-        <ListItems
+        <UauListItems
           actionLabel="UAU"
           handleItemClick={(item) => props.addMovie(item)}
           items={items}
+          moviesByIds={moviesByIds}
         />
       )}
       pagination={(
@@ -64,7 +66,9 @@ SearchPage.propTypes = {
   addMovie: func,
 };
 
+const mapStateToProps = (state) => ({ moviesByIds: getMoviesByIds(state) });
+
 export default connect(
-  null,
+  mapStateToProps,
   { addMovie },
 )(SearchPage);
