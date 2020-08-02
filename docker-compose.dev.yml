@@ -14,13 +14,13 @@ services:
     volumes:
       - type: bind
         source: ./frontend/coverage
-        target: /frontend/coverage
+        target: /mobiliza/coverage
       - type: bind
         source: ./frontend/public
-        target: /frontend/public
+        target: /mobiliza/public
       - type: bind
         source: ./frontend/src
-        target: /frontend/src
+        target: /mobiliza/src
     ports:
       - target: 3000
         published: 3000
