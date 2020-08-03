@@ -16,11 +16,13 @@ const Search = ({ handleSearch }) => {
   return (
     <InputGroup className="mb-3">
       <FormControl
+        data-testid="search-input"
         onChange={handleSearchChange}
         placeholder="Digite o termo para pesquisa"
       />
       <InputGroup.Append>
         <Button
+          data-testid="search-submit"
           onClick={(event) => {
             event.preventDefault();
             handleSearch(search);
