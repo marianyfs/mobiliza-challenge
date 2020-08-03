@@ -5,7 +5,7 @@ import {
 
 import { connect } from 'react-redux';
 
-import UauListItems from '../components/molecules/UauListItems';
+import UauList from '../components/molecules/UauList';
 
 import ItemsTemplate from '../components/templates/ItemsTemplate';
 
@@ -16,7 +16,7 @@ const UauPage = ({ movies, ...props }) => (
   <ItemsTemplate
     title="Lista de filmes UAU"
     items={(
-      <UauListItems
+      <UauList
         actionLabel="Remover"
         handleItemClick={(item) => props.removeMovie(item)}
         items={movies}

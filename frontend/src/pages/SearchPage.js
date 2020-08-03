@@ -8,7 +8,7 @@ import {
 } from 'react-bootstrap';
 
 import Loading from '../components/atoms/Loading';
-import UauListItems from '../components/molecules/UauListItems';
+import UauList from '../components/molecules/UauList';
 import Pagination from '../components/molecules/Pagination';
 import Search from '../components/molecules/Search';
 
@@ -38,7 +38,7 @@ const SearchPage = ({ moviesByIds, ...props }) => {
         ? <Loading />
         : undefined}
       items={(
-        <UauListItems
+        <UauList
           actionLabel="UAU"
           handleItemClick={(item) => props.addMovie(item)}
           items={items}

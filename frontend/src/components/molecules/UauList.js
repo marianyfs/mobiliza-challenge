@@ -7,7 +7,7 @@ import {
   Button, ListGroup,
 } from 'react-bootstrap';
 
-const ListItems = ({
+const UauList = ({
   actionLabel, handleItemClick, items, moviesByIds,
 }) => {
   if (items.length === 0) {
@@ -18,12 +18,14 @@ const ListItems = ({
     <ListGroup variant="primary">
       {items.map((item) => (
         <ListGroup.Item
+          data-testid={`item-${item.imdbID}`}
           key={item.imdbID}
         >
           {
               handleItemClick
               && (
               <Button
+                data-testid={`action-to-${item.imdbID}`}
                 className="mr-2"
                 disabled={!!moviesByIds[item.imdbID]}
                 onClick={() => handleItemClick(item)}
@@ -33,21 +35,21 @@ const ListItems = ({
               </Button>
               )
             }
-          {`${item.Title} - ${item.Year}`}
+          {`${item.Title}${item.Year ? ` - ${item.Year}` : ''}`}
         </ListGroup.Item>
       ))}
     </ListGroup>
   );
 };
 
-ListItems.defaultProps = {
+UauList.defaultProps = {
   actionLabel: undefined,
   handleItemClick: undefined,
   items: [],
   moviesByIds: {},
 };
 
-ListItems.propTypes = {
+UauList.propTypes = {
   actionLabel: string,
   handleItemClick: func,
   items: arrayOf(shape({
@@ -59,4 +61,4 @@ ListItems.propTypes = {
   }),
 };
 
-export default ListItems;
+export default UauList;
