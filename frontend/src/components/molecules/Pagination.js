@@ -22,15 +22,18 @@ const Pagination = ({
   return (
     <BSPagination>
       <BSPagination.First
+        data-testid="pagination-first"
         disabled={pagination[0] === currentPage}
         onClick={() => handlePageClick(1)}
       />
       <BSPagination.Prev
+        data-testid="pagination-prev"
         disabled={pagination[0] === currentPage}
         onClick={() => handlePageClick(currentPage - 1)}
       />
       {pagination.map((page) => (
         <BSPagination.Item
+          data-testid={`pagination-item-${page}`}
           disabled={currentPage === page}
           key={page}
           onClick={() => handlePageClick(page)}
@@ -39,10 +42,12 @@ const Pagination = ({
         </BSPagination.Item>
       ))}
       <BSPagination.Next
+        data-testid="pagination-next"
         disabled={pagination.reverse()[0] === currentPage}
         onClick={() => handlePageClick(currentPage + 1)}
       />
       <BSPagination.Last
+        data-testid="pagination-last"
         disabled={numberOfPages === currentPage}
         onClick={() => handlePageClick(numberOfPages)}
       />
