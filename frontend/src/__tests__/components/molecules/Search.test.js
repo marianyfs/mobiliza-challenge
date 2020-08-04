@@ -2,6 +2,7 @@
 import React from 'react';
 
 import { render, fireEvent } from '@testing-library/react';
+
 import Search from '../../../components/molecules/Search';
 
 describe('Test Search Molecule', () => {
